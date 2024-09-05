@@ -34,7 +34,7 @@ func ReadBlob(f *os.File) (string, error) {
 func (c *BlobRead) Exec() {
 	if c.args[0] == "-p" {
 		dir := c.args[1][:2]
-		file := c.args[1][0:]
+		file := c.args[1][2:]
 		path := fmt.Sprintf(".git/objects/%v/%v", dir, file)
 		f, err := os.Open(path)
 		defer f.Close()
