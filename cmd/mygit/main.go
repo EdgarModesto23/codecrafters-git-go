@@ -14,13 +14,18 @@ type Application struct {
 
 func (a Application) GetCommander() (Commander, error) {
 	if a.command == "cat-file" {
-		comm := BlobRead{args: a.args}
-		return &comm, nil
+		reader := BlobRead{args: a.args}
+		return &reader, nil
 	}
 	if a.command == "init" {
 		init := Init{}
 		return &init, nil
 	}
+	if a.command == "hash-object" {
+		writter := BlobWrite{flag: a.args[0], filepath: a.args[1]}
+		return &writter, nil
+	}
+
 	return nil, errors.New("Command not found")
 }
 
