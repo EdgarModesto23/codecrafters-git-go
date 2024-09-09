@@ -13,8 +13,8 @@ type Application struct {
 }
 
 func (a Application) GetCommander() (Commander, error) {
-	if a.command == "cat-file" {
-		reader := BlobRead{args: a.args}
+	if a.command == "cat-file" || a.command == "ls-tree" {
+		reader := ObjectRead{command: a.command, flag: a.args[0], args: a.args[0:]}
 		return &reader, nil
 	}
 	if a.command == "init" {
